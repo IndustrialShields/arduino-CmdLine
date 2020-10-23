@@ -17,8 +17,16 @@ class CmdLine {
 		explicit CmdLine(Stream &stream);
 
 	public:
-		void begin(const cmd_t *commands, size_t num);
+		void begin(const cmd_t *commands, size_t num, bool enabled = true);
 		void update();
+
+		void enable();
+		inline void disable() {
+			_enabled = false;
+		}
+		inline bool isEnabled() const {
+			return _enabled;
+		}
 
 	private:
 		void reset();
@@ -32,6 +40,7 @@ class CmdLine {
 
 		const cmd_t *_commands;
 		size_t _num;
+		bool _enabled;
 };
 
 #endif // __CmdLine_H__
